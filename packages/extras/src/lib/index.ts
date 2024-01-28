@@ -31,6 +31,9 @@ export { default as Align } from './components/Align/Align.svelte'
 export { default as CSM } from './components/CSM/CSM.svelte'
 export { default as Billboard } from './components/Billboard/Billboard.svelte'
 
+export { default as ShaderMaterial } from './components/ShaderMaterial/ShaderMaterial.svelte'
+export { shaderMaterial } from './components/ShaderMaterial/ShaderMaterial'
+
 // suspense
 export { default as Suspense } from './suspense/Suspense.svelte'
 export { useSuspense } from './suspense/useSuspense'

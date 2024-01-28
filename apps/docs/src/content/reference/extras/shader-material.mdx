@@ -1,0 +1,109 @@
+---
+{
+  order: 11.4,
+  category: '@threlte/extras',
+  name: '<ShaderMaterial>',
+  sourcePath: 'packages/extras/src/lib/components/ShaderMaterial/ShaderMaterial.svelte',
+  type: 'component',
+  'componentSignature':
+    {
+      extends: { type: 'ShaderMaterial', url: 'https://threejs.org/docs/index.html#api/en/materials/ShaderMaterial' },
+      'props':
+        [
+          { name: 'uniforms', type: '{[name: string]: (CubeTexture
+    | Texture
+    | Int32Array
+    | Float32Array
+    | Matrix4
+    | Matrix3
+    | Quaternion
+    | Vector4
+    | Vector3
+    | Vector2
+    | Color
+    | number
+    | boolean
+    | Array<any>
+    | null)>}', required: false },
+          { name: 'vertexShader', type: 'string', required: true },
+          { name: 'fragmentShader', type: 'string', required: true },
+        ]
+    }
+}
+---
+
+This component is a port of [drei's `<shaderMaterial>`
+component](https://github.com/pmndrs/drei#shadermaterial) which creates a THREE.ShaderMaterial for you with easier handling of uniforms,
+which are automatically declared as setter/getters on the object.
+
+So for example instead of writing `material.uniforms.time.value = 0.5` you can write `material.time = 0.5`.
+
+<Example path="extras/shader-material" />
+
+## Examples
+
+### Use as a component
+
+```svelte title="ShaderMaterialComponent.svelte"
+<script lang="ts">
+  import { T } from '@threlte/core'
+  import { ShaderMaterial } from '@threlte/extras'
+
+	const fragmentShader = `
+void main() {
+	vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+	gl_Position = projectionMatrix * viewMatrix * modelPosition;
+}`;
+
+	const vertexShader = `uniform vec3 color;
+void main()
+{
+	gl_FragColor = vec4(color, 1.0);
+}`;
+</script>
+
+<T.Mesh>
+	<ShaderMaterial
+		uniforms={{
+			color: new Color(1.0, 0.0, 0.0)
+		}}
+		{vertexShader}
+		{fragmentShader}
+		/>
+		<T.PlaneGeometry args={[2, 2]} />
+</T.Mesh>
+```
+
+### Use as a factory function
+
+```svelte title="ShaderMaterialFactory.svelte"
+<script lang="ts">
+	import { T } from '@threlte/core'
+	import { shaderMaterial } from '@threlte/extras'
+
+	const fragmentShader = `
+void main() {
+	vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+	gl_Position = projectionMatrix * viewMatrix * modelPosition;
+}`;
+
+	const vertexShader = `uniform vec3 color;
+void main()
+{
+	gl_FragColor = vec4(color, 1.0);
+}`;
+
+	const material = shaderMaterial({
+		uniforms: {
+			color: new Color(1.0, 0.0, 0.0)
+		},
+		vertexShader,
+		fragmentShader
+	});
+</script>
+
+<T.Mesh>
+	<T is={material} />
+	<T.PlaneGeometry args={[2, 2]} />
+</T.Mesh>
+```
