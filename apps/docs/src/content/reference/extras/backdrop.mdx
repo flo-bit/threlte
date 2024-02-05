@@ -1,0 +1,40 @@
+---
+{
+  order: 11.5,
+  category: '@threlte/extras',
+  name: '<Backdrop>',
+  sourcePath: 'packages/extras/src/lib/components/Backdrop/Backdrop.svelte',
+  type: 'component',
+  'componentSignature':
+    {
+      extends: { type: 'Group', url: 'https://threejs.org/docs/index.html#api/en/objects/Group' },
+      'props':
+        [
+          { name: 'segments', type: 'number', default: '20', required: false, description: 'Resolution of the mesh' },
+					{ name: 'floor', type: 'number', default: '0.25', required: false, description: 'Stretches the floor segment' },
+					{ name: 'receiveShadows', type: 'boolean', default: 'false', required: false, description: 'Whether the backdrop should receive shadows' },
+        ]
+    }
+}
+---
+
+This component is a port of [drei's `<Backdrop>`
+component](https://github.com/pmndrs/drei#backdrop) a curved plane, like a studio backdrop. This is for presentational purposes, to break up light and shadows more interestingly.
+
+<Example path="extras/backdrop" />
+
+## Examples
+
+### Basic Example
+
+```svelte title="Billboard.svelte"
+<script lang="ts">
+  import { T } from '@threlte/core'
+  import { Backdrop } from '@threlte/extras'
+</script>
+
+<Backdrop>
+  <T.MeshStandardMaterial />
+</Billboard>
+```
+
