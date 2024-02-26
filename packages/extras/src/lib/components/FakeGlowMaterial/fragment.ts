@@ -22,7 +22,7 @@ void main()
 	float fakeGlow = fresnel;
 	fakeGlow += fresnel * glowSharpness;
 	fakeGlow *= falloff;
-	gl_FragColor = vec4(clamp(glowColor * fresnel, 0., 1.0), clamp(fakeGlow, 0., 1.0));
+	gl_FragColor = vec4(clamp(glowColor * fresnel, 0., 1.0), clamp(fakeGlow, 0., 1.0) * 0.3);
 
 	${ShaderChunk.tonemapping_fragment}
 	${ShaderChunk.colorspace_fragment}
