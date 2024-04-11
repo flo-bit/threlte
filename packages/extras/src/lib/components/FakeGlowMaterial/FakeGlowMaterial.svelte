@@ -18,13 +18,15 @@
   export let glowInternalRadius: $$Props['glowInternalRadius'] = 6.0
   export let glowColor: $$Props['glowColor'] = 'green'
   export let glowSharpness: $$Props['glowSharpness'] = 1.0
+	export let opacity: $$Props['opacity'] = 1.0
 
   let material = new ShaderMaterial({
     uniforms: {
       falloff: { value: falloff },
       glowInternalRadius: { value: glowInternalRadius },
       glowColor: { value: new Color(glowColor) },
-      glowSharpness: { value: glowSharpness }
+      glowSharpness: { value: glowSharpness },
+			opacity: { value: opacity }
     }
   })
 
@@ -35,6 +37,7 @@
     material.uniforms.glowInternalRadius.value = glowInternalRadius
     material.uniforms.glowColor.value = new Color(glowColor)
     material.uniforms.glowSharpness.value = glowSharpness
+		material.uniforms.opacity.value = opacity
 
     invalidate()
   }

@@ -7,6 +7,7 @@ export type FakeGlowMaterialProps = Props<ShaderMaterial> & {
   glowInternalRadius?: number
   glowColor?: ColorRepresentation
   glowSharpness?: number
+  opacity?: number
 }
 
 export type FakeGlowMaterialEvents = Events<ShaderMaterial>
